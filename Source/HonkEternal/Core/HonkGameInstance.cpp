@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Made dy Titled Goose Team
 
 
 #include "HonkGameInstance.h"
