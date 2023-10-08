@@ -5,6 +5,9 @@
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Components/PlayerArmorComponent.h"
+#include "Components/PlayerDamageManagerComponent.h"
+#include "HonkEternal/Components/HealthComponent.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -14,6 +17,10 @@ APlayerCharacter::APlayerCharacter()
 	CameraComponent->SetupAttachment(GetRootComponent());
 	CameraComponent->SetRelativeLocation(FVector(0.f, 0.f, 60.f));
 	CameraComponent->bUsePawnControlRotation = true;
+
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>("HealthComponent");
+	ArmorComponent = CreateDefaultSubobject<UPlayerArmorComponent>("ArmorComponent");
+	DamageManagerComponent = CreateDefaultSubobject<UPlayerDamageManagerComponent>("DamageManager");
 }
 
 void APlayerCharacter::BeginPlay()
@@ -68,6 +75,11 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void APlayerCharacter::Move(const FInputActionValue& Value)
 {
+	if (!IsAlive())
+	{
+		return; 
+	}
+	
 	const FVector2D MovementVector = Value.Get<FVector2D>();
 
 	if (Controller)
@@ -79,6 +91,11 @@ void APlayerCharacter::Move(const FInputActionValue& Value)
 
 void APlayerCharacter::Aim(const FInputActionValue& Value)
 {
+	if (!IsAlive())
+	{
+		return; 
+	}
+	
 	const FVector2D AimVector = Value.Get<FVector2D>();
 
 	if (Controller)
@@ -90,20 +107,40 @@ void APlayerCharacter::Aim(const FInputActionValue& Value)
 
 void APlayerCharacter::Shoot()
 {
+	if (!IsAlive())
+	{
+		return; 
+	}
+	
 	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Red, "NYI. Player Shoot");
 }
 
 void APlayerCharacter::Dash()
 {
-	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Red, "NYI. Player Dash");
+	if (!IsAlive())
+	{
+		return; 
+	}
+	
+	GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Red, "NYI. Player Dash");
 }
 
 void APlayerCharacter::Interact()
 {
-	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Red, "NYI. Player Interaction");
+	if (!IsAlive())
+	{
+		return; 
+	}
+	
+	GEngine->AddOnScreenDebugMessage(2, 5.0f, FColor::Red, "NYI. Player Interaction");
 }
 
 void APlayerCharacter::Pause()
 {
-	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Red, "NYI. Game Pause");
+	if (!IsAlive())
+	{
+		return; 
+	}
+	
+	GEngine->AddOnScreenDebugMessage(3, 5.0f, FColor::Red, "NYI. Game Pause");
 }

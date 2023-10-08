@@ -5,11 +5,15 @@
 #include "CoreMinimal.h"
 #include "InputActionValue.h"
 #include "GameFramework/Character.h"
+#include "HonkEternal/Components/HealthComponent.h"
 #include "PlayerCharacter.generated.h"
 
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
+class UHealthComponent;
+class UPlayerArmorComponent;
+class UPlayerDamageManagerComponent;
 
 UCLASS()
 class HONKETERNAL_API APlayerCharacter : public ACharacter
@@ -34,6 +38,15 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintGetter=GetCameraComponent)
 	TObjectPtr<UCameraComponent> CameraComponent = nullptr;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintGetter=GetCameraComponent)
+	TObjectPtr<UHealthComponent> HealthComponent = nullptr;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintGetter=GetCameraComponent)
+	TObjectPtr<UPlayerArmorComponent> ArmorComponent = nullptr;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintGetter=GetCameraComponent)
+	TObjectPtr<UPlayerDamageManagerComponent> DamageManagerComponent = nullptr;
+
 private:
 	// Inputs
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
@@ -44,7 +57,7 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputAction> AimAction = nullptr;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputAction> ShootAction = nullptr;
 
@@ -53,10 +66,10 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputAction> DashAction = nullptr;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputAction> InteractAction = nullptr;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputAction> PauseAction = nullptr;
 
@@ -77,7 +90,9 @@ private:
 
 	UFUNCTION()
 	void Pause();
-	
+
+	bool IsAlive() const { return HealthComponent->GetCurValue() > 0; }
+
 	// Other
 	UPROPERTY()
 	APlayerController* PlayerController = nullptr;
