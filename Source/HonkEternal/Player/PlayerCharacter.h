@@ -38,13 +38,13 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintGetter=GetCameraComponent)
 	TObjectPtr<UCameraComponent> CameraComponent = nullptr;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintGetter=GetCameraComponent)
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UHealthComponent> HealthComponent = nullptr;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintGetter=GetCameraComponent)
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UPlayerArmorComponent> ArmorComponent = nullptr;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintGetter=GetCameraComponent)
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UPlayerDamageManagerComponent> DamageManagerComponent = nullptr;
 
 private:
