@@ -2,10 +2,15 @@
 
 #include "PlayerCharacter.h"
 
+#include "Camera/CameraComponent.h"
+
 
 APlayerCharacter::APlayerCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
+	CameraComponent->SetupAttachment(GetRootComponent());
 }
 
 void APlayerCharacter::BeginPlay()
@@ -23,4 +28,3 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
-

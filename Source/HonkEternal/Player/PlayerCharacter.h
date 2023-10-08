@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "PlayerCharacter.generated.h"
 
+class UCameraComponent;
+
 UCLASS()
 class HONKETERNAL_API APlayerCharacter : public ACharacter
 {
@@ -21,4 +23,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UFUNCTION(BlueprintGetter)
+	UCameraComponent* GetCameraComponent() const { return CameraComponent; };
+
+protected:
+	UPROPERTY(VisibleDefaultsOnly, BlueprintGetter=GetCameraComponent)
+	TObjectPtr<UCameraComponent> CameraComponent = nullptr;
 };
