@@ -90,16 +90,20 @@ void APlayerCharacter::Aim(const FInputActionValue& Value)
 
 void APlayerCharacter::Shoot()
 {
+	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Red, "NYI. Player Shoot");
 }
 
 void APlayerCharacter::Dash()
 {
+	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Red, "NYI. Player Dash");
 }
 
 void APlayerCharacter::Interact()
 {
+	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Red, "NYI. Player Interaction");
 }
 
 void APlayerCharacter::Pause()
 {
+	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Red, "NYI. Game Pause");
 }

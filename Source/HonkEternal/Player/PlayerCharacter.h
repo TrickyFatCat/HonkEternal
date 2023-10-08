@@ -60,17 +60,24 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UInputAction> PauseAction = nullptr;
 
+	UFUNCTION()
 	void Move(const FInputActionValue& Value);
 
+	UFUNCTION()
 	void Aim(const FInputActionValue& Value);
 
+	UFUNCTION()
 	void Shoot();
 
+	UFUNCTION()
 	void Dash();
 
+	UFUNCTION()
 	void Interact();
 
+	UFUNCTION()
 	void Pause();
+	
 	// Other
 	UPROPERTY()
 	APlayerController* PlayerController = nullptr;
