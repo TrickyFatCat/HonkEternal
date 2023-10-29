@@ -7,6 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Components/PlayerArmorComponent.h"
 #include "Components/PlayerDamageManagerComponent.h"
+#include "GameFramework/PawnMovementComponent.h"
 #include "HonkEternal/Components/HealthComponent.h"
 
 APlayerCharacter::APlayerCharacter()
@@ -42,6 +43,15 @@ void APlayerCharacter::BeginPlay()
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+#if WITH_EDITORONLY_DATA
+	FString Message = FString::Printf(TEXT("Speed: %.2f"), GetMovementComponent()->Velocity.Length());
+	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Magenta, Message);
+	Message = FString::Printf(TEXT("Armor: %d/%d"), ArmorComponent->GetCurValue(), ArmorComponent->GetMaxValue());
+	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Blue, Message);
+	Message = FString::Printf(TEXT("Health: %d/%d"), HealthComponent->GetCurValue(), HealthComponent->GetMaxValue());
+	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green, Message);
+#endif
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
